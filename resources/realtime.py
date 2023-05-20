@@ -59,4 +59,4 @@ async def real_time(img: UploadFile, latitude, longitude):
 
     print(f"Execution time: {time.time() - start_time} seconds")
 
-    return JSONResponse({"status": "success"})
+    return JSONResponse({"potholes_count": potholes_count, "status": "success"})
