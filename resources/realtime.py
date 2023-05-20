@@ -6,6 +6,7 @@ import time
 
 from datetime import datetime
 from fastapi import FastAPI, UploadFile
+from starlette.responses import JSONResponse
 
 from model.yolo import model
 from src.mongo import col_potholes
@@ -58,4 +59,4 @@ async def real_time(img: UploadFile, latitude, longitude):
 
     print(f"Execution time: {time.time() - start_time} seconds")
 
-    return {"potholes_count": potholes_count}
+    return JSONResponse({"status": "success"})
