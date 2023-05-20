@@ -6,7 +6,7 @@ local = "mongodb://localhost:27017"
 
 
 client = pymongo.MongoClient(
-    local
+    server
 )
 
 db = client["pothole"]
