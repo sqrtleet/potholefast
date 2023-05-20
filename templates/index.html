@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузить изображение и получить новое</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<h1>Загрузить изображение и получить новое</h1>
+<form id="image-form" action="/image" method="post" enctype="multipart/form-data">
+    <input type="file" name="img" accept=".png,.jpg,.jpeg"/>
+    <input type="hidden" name="latitude" id="latitude" />
+    <input type="hidden" name="longitude" id="longitude" />
+    <br/>
+    <br/>
+    <input type="submit" value="Отправить" id="submit-button"/>
+</form>
+<br/>
+<h1>Результат:</h1>
+<h2 id="potholes_count">Количество ям: 0</h2>
+<div style="display: flex">
+    <div id="image" style="width: 50%;"></div>
+    <div id="result" style="width: 50%;"></div>
+</div>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.permissions.query({name: 'geolocation'}).then(function (result) {
+                if (result.state === 'granted') {
+                    navigator.geolocation.getCurrentPosition(setPosition);
+                } else if (result.state === 'prompt') {
+                    navigator.geolocation.getCurrentPosition(setPosition, showError);
+                } else {
+                    alert('Доступ к геолокации запрещен.');
+                }
+            });
+        } else {
+            alert("Геолокация не поддерживается вашим браузером.");
+        }
+    }
+
+    function setPosition(position) {
+        document.getElementById("latitude").value = position.coords.latitude;
+        document.getElementById("longitude").value = position.coords.longitude;
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
+    getLocation();
+</script>
+</body>
+</html>
