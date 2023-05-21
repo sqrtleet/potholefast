@@ -29,7 +29,7 @@ async def image(img: UploadFile, latitude, longitude):
         shutil.copyfileobj(img.file, f)
 
     # делаем предсказание модели и сохраняем в папку runs
-    res = model.predict(image_path, save=True, imgsz=1280, hide_labels=True)
+    res = model.predict(image_path, save=True, imgsz=1280, show_labels=True)
 
     # получаем список ограничивающих рамок
     boxes = res[0].boxes
