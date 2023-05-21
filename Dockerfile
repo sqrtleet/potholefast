@@ -10,4 +10,4 @@ RUN apt-get update && apt-get install -y libgl1-mesa-glx
 
 COPY . /app
 
-CMD python3 app.py
+CMD python3 main.py
