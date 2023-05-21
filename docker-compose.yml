@@ -2,7 +2,7 @@ version: "3"
 
 services:
   api:
-    build: .
+    build: ./potholesfast
     container_name: kronter
     restart: unless-stopped
     env_file: .env
