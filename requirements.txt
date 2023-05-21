@@ -4,3 +4,4 @@ fastapi~=0.95.2
 uvicorn~=0.22.0
 starlette~=0.27.0
 python-multipart~=0.0.6
+bson~=0.5.10
