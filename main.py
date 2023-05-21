@@ -1,7 +1,8 @@
 import uvicorn
-from fastapi import FastAPI, Request, UploadFile, File, Form
+from fastapi import FastAPI, Request, UploadFile, File, Form, Path
 
 from resources.home import home as home_handler
+from resources.info import info as info_handler
 from resources.image import image as image_handler
 from resources.realtime import real_time as realtime_handler
 from resources.potholes import potholes as potholes_handler
@@ -28,6 +29,10 @@ async def realtime(img: UploadFile = File(...), latitude: float = Form(...), lon
 async def potholes():
     return await potholes_handler()
 
+
+@app.get("/info/{_id}")
+async def info(_id: str):
+    return await info_handler(_id)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=7777)
