@@ -21,7 +21,6 @@ warmup_model()
 app = FastAPI()
 
 
-@app.post("/realtime")
 async def real_time(img: UploadFile, latitude, longitude):
     start_time = time.time()
 

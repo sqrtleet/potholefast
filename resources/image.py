@@ -17,7 +17,6 @@ model.predict("1.png", save=False, imgsz=1280)
 app = FastAPI()
 
 
-@app.post("/image")
 async def image(img: UploadFile, latitude, longitude):
     start_time = time.time()
 

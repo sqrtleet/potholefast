@@ -5,7 +5,6 @@ from src.mongo import col_potholes
 app = FastAPI()
 
 
-@app.get("/potholes")
 async def potholes():
     results = list(col_potholes.find({}, {"_id": 1, "geo": 1}))
     geo_data = []
