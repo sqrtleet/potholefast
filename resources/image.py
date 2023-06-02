@@ -40,19 +40,13 @@ async def image(img: UploadFile, latitude, longitude):
 
     # сохраняем в базу данных
     if potholes_count > 0:
-        col_potholes.update_one(
+        col_potholes.insert_one(
             {
-                "img_detect": encoded_img_detect
-            },
-            {
-                "$set": {
-                    "img_detect": encoded_img_detect,
-                    "geo": [latitude, longitude],
-                    "potholes_count": potholes_count,
-                    "_created": datetime.now(),
-                }
-            },
-            upsert=True
+                "img_detect": encoded_img_detect,
+                "geo": [latitude, longitude],
+                "potholes_count": potholes_count,
+                "_created": datetime.now(),
+            }
         )
     os.remove(image_path)
     shutil.rmtree("runs")
