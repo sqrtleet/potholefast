@@ -43,8 +43,10 @@ async def real_time(img: UploadFile, latitude, longitude):
     with open(f"runs/detect/predict/{image_name}.png", "rb") as f:
         encoded_img_detect = base64.b64encode(f.read()).decode("utf-8")
 
+    existing_pothole = col_potholes.find_one({"geo": [latitude, longitude]})
+
     # сохраняем в базу данных
-    if potholes_count > 0:
+    if not existing_pothole and potholes_count > 0:
         col_potholes.insert_one(
             {
                 "img_detect": encoded_img_detect,
